@@ -2,7 +2,12 @@
 
 ### Installation
 
-OKay I need to detail all steps required to successfully run the application and outline the optimizations the student made in index.html, views/js/main.js and pizza.html
+All production code is in the Public directory and subdirectories. Open index.html
+
+I have changed the file structure so that there is no more 'views' folder. I haven't created a way to maintain the project file structure in public after using gulp.
+TODO: modify all links to pizza.html
+TODO: modify all img links in pizza
+TODO: just verify css * js links
 
 ### index.html Modifications
   * Removed (commented out) Google analytics inline script and script tag. All other
