@@ -9,7 +9,7 @@ var gulp = require('gulp'),
     imagemin = require('gulp-imagemin'),
     concatify = require('gulp-concat'),
     minifyhtml = require('gulp-minify-html'),
-    gzip = require('gulp-gzip');
+    gzip = require('gulp-gzip'),
     livereload = require('gulp-livereload'); //okay maybe I figure out livereload later..
 
 // File Paths to Development Code ... I've double checked these are correct
