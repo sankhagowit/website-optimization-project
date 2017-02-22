@@ -5,14 +5,15 @@
 All production code is in the Public directory and subdirectories. Open index.html
 
 I have changed the file structure so that there is no more 'views' folder. I haven't created a way to maintain the project file structure in public after using gulp.
-TODO: modify all links to pizza.html
-TODO: modify all img links in pizza
-TODO: just verify css * js links
 
 ### index.html Modifications
   * Removed (commented out) Google analytics inline script and script tag. All other
-  JS is async
-  *  
+  JS is async and not render blocking
+  *  Removed google fonts call
+  * inlined style CSS
+  * added media query to print css for print only
+  * used gulp to minify and compress all html, css, js. also optimized images.
+  * updated link to pizza.html so that it looks in the root dir not views folder
 
 ### views/js/main.js Modifications
   * Mod 1
