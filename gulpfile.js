@@ -27,7 +27,8 @@ gulp.task('scripts', function() {
         .pipe(sourcemaps.init())
         .pipe(uglify())
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('./public/js/'));
+        .pipe(gulp.dest('./public/js/'))
+        .pipe(livereload());
 });
 
 // Concat and Minify CSS
@@ -35,7 +36,8 @@ gulp.task('styles', function(){
     return gulp.src(paths.styles)
         .pipe(minifyCSS())
         //.pipe(concatify()) //I'm confused on how to use concat with a task runner - will probably inline the minified css anyways...
-        .pipe(gulp.dest('./public/css/'));
+        .pipe(gulp.dest('./public/css/'))
+        .pipe(livereload());
 });
 
 // Minifies HTML files and outputs them to build/*.html
@@ -56,12 +58,13 @@ gulp.task('images', function() {
                 .pipe(imagemin({
                     optimizationLevel: 5
                 }))
-                .pipe(gulp.dest('./public/img'));
+                .pipe(gulp.dest('./public/img'))
+                .pipe(livereload());
 });
 
 // Watches for changes to our files and executes required scripts
 gulp.task('watch', function() {
-    //livereload.listen({basePath: 'public'}); // I don't understand this yet
+    livereload.listen(); // Do I need to include a basePath key value pair?
     gulp.watch(paths.scripts, ['scripts']);
     gulp.watch(paths.styles, ['styles']);
     gulp.watch(paths.content, ['content']);
@@ -70,10 +73,10 @@ gulp.task('watch', function() {
 
 // Launches a test webserver
 gulp.task('webserver', function() {
-    gulp.src('build')
+    gulp.src('public')
         .pipe(webserver({
             livereload: true,
-            port: 1111
+            port: 8080
         }));
 });
 
