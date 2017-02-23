@@ -11,6 +11,7 @@ var gulp = require('gulp'),
     minifyhtml = require('gulp-minify-html'),
     gzip = require('gulp-gzip'),
     imageResize = require('gulp-image-resize'),
+    rename = require('gulp-rename'),
     livereload = require('gulp-livereload'); //okay maybe I figure out livereload later..
 
 // File Paths to Development Code ... I've double checked these are correct
@@ -72,10 +73,8 @@ gulp.task('resize', function(){
     gulp.src(paths.images)
     .pipe(imageResize({
       width: 200,
-      height: 50,
-      crop: true,
-      upscale: false
     }))
+    .pipe(rename(function(path){path.basename += "-thumbnail";}))
     .pipe(gulp.dest('./public/img'));
 });
 
