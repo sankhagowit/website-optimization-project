@@ -69,6 +69,7 @@ gulp.task('images', function() {
 });
 
 // Resize images for use as thumbnails..
+// look at gulpjs documentation again good stuff there (parallel)
 gulp.task('resize', function(){
     gulp.src(paths.images)
     .pipe(imageResize({
