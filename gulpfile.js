@@ -10,6 +10,7 @@ var gulp = require('gulp'),
     concatify = require('gulp-concat'),
     minifyhtml = require('gulp-minify-html'),
     gzip = require('gulp-gzip'),
+    imageResize = require('gulp-image-resize'),
     livereload = require('gulp-livereload'); //okay maybe I figure out livereload later..
 
 // File Paths to Development Code ... I've double checked these are correct
@@ -64,6 +65,18 @@ gulp.task('images', function() {
                 }))
                 .pipe(gulp.dest('./public/img'))
                 .pipe(livereload());
+});
+
+// Resize images for use as thumbnails..
+gulp.task('resize', function(){
+    gulp.src(paths.images)
+    .pipe(imageResize({
+      width: 200,
+      height: 50,
+      crop: true,
+      upscale: false
+    }))
+    .pipe(gulp.dest('./public/img'));
 });
 
 // Watches for changes to our files and executes required scripts
