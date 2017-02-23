@@ -9,7 +9,7 @@ var gulp = require('gulp'),
     imagemin = require('gulp-imagemin'),
     concatify = require('gulp-concat'),
     minifyhtml = require('gulp-minify-html'),
-    gzip = require('gulp-gzip'), //watch out for this.
+    gzip = require('gulp-gzip'),
     imageResize = require('gulp-image-resize'),
     rename = require('gulp-rename'),
     livereload = require('gulp-livereload'); //okay maybe I figure out livereload later..
@@ -54,8 +54,8 @@ gulp.task('content', function() {
             quotes: true
         }))
         //.pipe(gzip())
-        .pipe(gulp.dest('./public'));
-        //.pipe(livereload());  //I think this is how this works?
+        .pipe(gulp.dest('./public'))
+        .pipe(livereload());  //I think this is how this works?
 });
 
 // Optimizes our image files and outputs them to build/image/*
@@ -71,7 +71,7 @@ gulp.task('images', function() {
 // Resize images for use as thumbnails..
 // look at gulpjs documentation again good stuff there (parallel)
 gulp.task('resize', function(){
-    gulp.src(paths.images)
+    return gulp.src(paths.images)
     .pipe(imageResize({
       width: 200,
     }))
@@ -98,3 +98,26 @@ gulp.task('webserver', function() {
 });
 
 gulp.task('default', ['watch', 'webserver']);
+
+// Compresses html, css, and js using gzip
+gulp.task('compress', function(){
+    gulp.src(paths.content)
+        .pipe(minifyhtml({
+            empty: true,
+            quotes: true
+        }))
+        .pipe(gzip())
+        .pipe(gulp.dest('./public'));
+
+    gulp.src(paths.styles)
+        .pipe(minifyCSS())
+        .pipe(gzip())
+        .pipe(gulp.dest('./public/css/'));
+
+    gulp.src(paths.scripts)
+        .pipe(sourcemaps.init())
+        .pipe(uglify())
+        .pipe(sourcemaps.write())
+        .pipe(gzip())
+        .pipe(gulp.dest('./public/js/'));
+});
