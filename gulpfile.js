@@ -9,7 +9,7 @@ var gulp = require('gulp'),
     imagemin = require('gulp-imagemin'),
     concatify = require('gulp-concat'),
     minifyhtml = require('gulp-minify-html'),
-    gzip = require('gulp-gzip'),
+    gzip = require('gulp-gzip'), //watch out for this.
     imageResize = require('gulp-image-resize'),
     rename = require('gulp-rename'),
     livereload = require('gulp-livereload'); //okay maybe I figure out livereload later..
@@ -30,7 +30,7 @@ gulp.task('scripts', function() {
         .pipe(sourcemaps.init())
         .pipe(uglify())
         .pipe(sourcemaps.write())
-        .pipe(gzip())
+        //.pipe(gzip())
         .pipe(gulp.dest('./public/js/'))
         .pipe(livereload());
 });
@@ -39,7 +39,7 @@ gulp.task('scripts', function() {
 gulp.task('styles', function(){
     return gulp.src(paths.styles)
         .pipe(minifyCSS())
-        .pipe(gzip())
+        //.pipe(gzip())
         //.pipe(concatify()) //I'm confused on how to use concat with a task runner - will probably inline the minified css anyways...
         .pipe(gulp.dest('./public/css/'))
         .pipe(livereload());
@@ -53,9 +53,9 @@ gulp.task('content', function() {
             empty: true,
             quotes: true
         }))
-        .pipe(gzip())
-        .pipe(gulp.dest('./public'))
-        .pipe(livereload());  //I think this is how this works?
+        //.pipe(gzip())
+        .pipe(gulp.dest('./public'));
+        //.pipe(livereload());  //I think this is how this works?
 });
 
 // Optimizes our image files and outputs them to build/image/*
