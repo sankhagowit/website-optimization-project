@@ -2,14 +2,15 @@
 
 ### Installation
 
-All production code is in the Public directory and subdirectories. Open index.html
+All production code is in the Public directory. Open index.html to access the main page with links to all others.
 
 I have changed the file structure so that there is no more 'views' folder. I haven't created a way to maintain the project file structure in public after using gulp.
 
+The public production code is built using gulp - see the package.json for devDependencies and the gulpfile for gulp tasks.
+
 ### index.html Modifications
-  * Removed (commented out) Google analytics inline script and script tag. All other
-  JS is async and not render blocking
-  *  Removed google fonts call
+  * Removed (commented out) Google analytics inline script and script tag. All other JS is async and not render blocking
+  * Removed google fonts call
   * inlined style CSS
   * added media query to print css for print only
   * used gulp to minify and compress all html, css, js. also optimized images.
@@ -17,12 +18,7 @@ I have changed the file structure so that there is no more 'views' folder. I hav
 
 ### views/js/main.js Modifications
   * In the updatePositions function we have a forced synchronous layout occurring. to calculate the phase of the pizza .scrollTop is called invoking layout which is then invalidated when .style.left is called. I moved the call to scrollTop outside of the for loop
-  * After that
-  * There also is some loading jank when the pizzas are created -> style and layout are being called. I have modified
-  * To decrease time to resize pizzas I blanked. There was a forced synchronous layout occurring in changePizzaSizes. I moved the calculation of dx and newWidth outside of the for loop.
-
-### pizza.html Modifications
-  * Mod 1
+  * To decrease time to resize pizzas I There was a forced synchronous layout occurring in changePizzaSizes. I moved the calculation of dx and newWidth outside of the for loop.
 
 ### views/pizzastyle.css Modifications
   * first I changed styles.css to pizzastyles.css so that I didn't keep over writing the styles.css when minifying code with gulp (do I have to write a loop to put items in different folders?)
