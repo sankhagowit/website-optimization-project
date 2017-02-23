@@ -16,10 +16,17 @@ I have changed the file structure so that there is no more 'views' folder. I hav
   * updated link to pizza.html so that it looks in the root dir not views folder
 
 ### views/js/main.js Modifications
-  * Mod 1
+  * In the updatePositions function we have a forced synchronous layout occurring. to calculate the phase of the pizza .scrollTop is called invoking layout which is then invalidated when .style.left is called. I moved the call to scrollTop outside of the for loop
+  * After that
+  * There also is some loading jank when the pizzas are created -> style and layout are being called. I have modified
+  * To decrease time to resize pizzas I blanked. There was a forced synchronous layout occurring in changePizzaSizes. I moved the calculation of dx and newWidth outside of the for loop.
 
 ### pizza.html Modifications
   * Mod 1
+
+### views/pizzastyle.css Modifications
+  * first I changed styles.css to pizzastyles.css so that I didn't keep over writing the styles.css when minifying code with gulp (do I have to write a loop to put items in different folders?)
+  * added will-change:transform to the .movers class as there was a significant amount of time spent composting
 
 ## UDACITY ADVICE BELOW:
 Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).
